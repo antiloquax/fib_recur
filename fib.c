@@ -6,19 +6,16 @@
 
 /* Using a global array to store the fibs. 
  * Must initialize to zero for function to work. */
-unsigned long long int FIBS[SIZE] = {0};
+unsigned long long int FIBS[SIZE] = {0, 1};
 
 unsigned long long int fib(int n);
 
 int main(void)
 {
-    int i;
-    int len = sizeof(FIBS) / sizeof(FIBS[0]);
-    
-    /* Populate the array with Fibonacci numbers. */
-    for (i = 0; i < len; i++)
-        FIBS[i] = fib(i);
+    int i, len = SIZE;
 
+    fib(SIZE-1);
+    
     /* Display the numbers. */
     for (i = 0; i < len; i++)
         printf("Fib %d is %llu.\n", i, FIBS[i]);
@@ -34,5 +31,6 @@ unsigned long long int fib(int n)
         return n;
     if (FIBS[n])
         return FIBS[n];
-    return fib(n-1) + fib(n-2);
+    FIBS[n] = fib(n-1) + fib(n-2);
+    return FIBS[n];
 }
